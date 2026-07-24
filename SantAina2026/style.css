@@ -1,0 +1,370 @@
+/* =====================================================
+   VARIABLES — paleta y tipografías
+   (cámbialas aquí si algún día quieres otros tonos)
+===================================================== */
+:root {
+  --color-fondo: #fffbf7;      /* blanco cálido */
+  --color-rosa: #f7d7de;       /* rosa suave */
+  --color-azul: #d3e4f0;       /* azul pastel */
+  --color-rojo: #c97b85;       /* rojo/rosa suave, acentos */
+  --color-texto: #4b3a3e;      /* marrón-ciruela, más cálido que negro */
+  --color-oro: #c9a570;        /* línea dorada fina, detalles */
+  --color-papel: #fffdfb;
+
+  --fuente-titulo: "Dancing Script", cursive;
+  --fuente-carta: "Cormorant Garamond", serif;
+  --fuente-utilidad: "Montserrat", sans-serif;
+
+  --sombra-suave: 0 10px 30px -12px rgba(75, 58, 62, 0.28);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: radial-gradient(circle at 15% 0%, var(--color-rosa) 0%, transparent 45%),
+    radial-gradient(circle at 100% 100%, var(--color-azul) 0%, transparent 40%),
+    var(--color-fondo);
+  color: var(--color-texto);
+  font-family: var(--fuente-carta);
+  overflow: hidden; /* la página no hace scroll: todo cabe en una pantalla */
+  display: flex;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* =====================================================
+   TARJETA — contenedor único, pensado para móvil vertical
+===================================================== */
+.tarjeta {
+  width: 100%;
+  max-width: 460px;
+  height: 100dvh;
+  height: 100vh; /* fallback para navegadores sin dvh */
+  padding: 3.2vh 7vw 2.6vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.4vh;
+}
+
+/* Decoración floral superior */
+.decor-top {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 260px;
+}
+.decor-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.rama {
+  fill: none;
+  stroke: var(--color-oro);
+  stroke-width: 1.3;
+  stroke-linecap: round;
+}
+.rama.fina {
+  stroke-width: 1;
+  opacity: 0.85;
+}
+.petalo-svg {
+  fill: var(--color-rosa);
+}
+.centro-flor {
+  fill: var(--color-rojo);
+}
+.decor-sway {
+  transform-origin: center;
+  animation: balanceo 7s ease-in-out infinite;
+}
+
+/* Título */
+.titulo {
+  flex: 0 0 auto;
+}
+.titulo h1 {
+  font-family: var(--fuente-titulo);
+  font-weight: 700;
+  font-size: clamp(1.7rem, 8vw, 2.5rem);
+  line-height: 1.15;
+  margin: 0;
+  color: var(--color-rojo);
+}
+.subtitulo {
+  margin: 0.2rem 0 0;
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(0.95rem, 3.6vw, 1.15rem);
+  color: var(--color-texto);
+  letter-spacing: 0.03em;
+}
+.corazon {
+  display: inline-block;
+}
+
+/* Foto */
+.foto-wrapper {
+  flex: 0 0 auto;
+  position: relative;
+}
+.foto-marco {
+  width: clamp(120px, 30vh, 180px);
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  border: 3px solid var(--color-papel);
+  box-shadow: var(--sombra-suave), 0 0 0 1px rgba(201, 165, 112, 0.35);
+  background: linear-gradient(160deg, var(--color-rosa), var(--color-azul));
+}
+.foto-marco::after {
+  content: "";
+  position: absolute;
+  inset: -7px;
+  border-radius: 50%;
+  border: 1px dashed var(--color-oro);
+  opacity: 0.6;
+  pointer-events: none;
+}
+.foto-marco img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.foto-vacia {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  font-family: var(--fuente-utilidad);
+  color: var(--color-texto);
+}
+.foto-vacia span {
+  font-size: 1.8rem;
+}
+.foto-vacia small {
+  font-size: 0.6rem;
+  opacity: 0.7;
+}
+.emblema {
+  position: absolute;
+  right: -0.2rem;
+  bottom: -0.2rem;
+  background: var(--color-papel);
+  border-radius: 50%;
+  width: 2.1rem;
+  height: 2.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  box-shadow: var(--sombra-suave);
+}
+
+/* Carta con el mensaje personal */
+.carta {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  max-width: 340px;
+  background: var(--color-papel);
+  border-radius: 18px;
+  box-shadow: var(--sombra-suave);
+  padding: 1.6rem 1.2rem 1rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sello {
+  position: absolute;
+  top: -0.7rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-rojo);
+  color: var(--color-papel);
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 10px -3px rgba(201, 123, 133, 0.6);
+}
+.carta-texto {
+  margin: 0;
+  font-size: clamp(0.92rem, 3.4vw, 1.05rem);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-y: auto;
+  max-height: 100%;
+  padding-right: 2px;
+}
+.carta-texto::-webkit-scrollbar {
+  width: 3px;
+}
+.carta-texto::-webkit-scrollbar-thumb {
+  background: var(--color-rosa);
+  border-radius: 3px;
+}
+
+/* Cuenta atrás */
+.cuenta-atras {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 340px;
+}
+.cuenta-atras-texto {
+  margin: 0 0 0.5rem;
+  font-family: var(--fuente-utilidad);
+  font-size: clamp(0.68rem, 2.6vw, 0.78rem);
+  font-weight: 500;
+  color: var(--color-texto);
+  letter-spacing: 0.01em;
+}
+.cuenta-atras-tarjeta {
+  background: var(--color-azul);
+  border-radius: 14px;
+  padding: 0.55rem 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  box-shadow: var(--sombra-suave);
+}
+.tiempo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 2.5rem;
+}
+.tiempo span {
+  font-family: var(--fuente-utilidad);
+  font-weight: 600;
+  font-size: clamp(1rem, 4.2vw, 1.3rem);
+  line-height: 1;
+  color: var(--color-texto);
+}
+.tiempo small {
+  font-family: var(--fuente-utilidad);
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.75;
+  margin-top: 0.15rem;
+}
+.sep {
+  font-family: var(--fuente-utilidad);
+  font-weight: 500;
+  opacity: 0.5;
+  padding-bottom: 0.9rem;
+}
+
+/* Mensaje final */
+.mensaje-final {
+  flex: 0 0 auto;
+}
+.mensaje-final p {
+  margin: 0;
+  font-family: var(--fuente-titulo);
+  font-size: clamp(1.1rem, 4.6vw, 1.35rem);
+  color: var(--color-rojo);
+}
+
+/* =====================================================
+   ANIMACIONES — sutiles, aparición al cargar
+===================================================== */
+.animar {
+  opacity: 0;
+  transform: translateY(10px);
+}
+body.cargado .animar {
+  animation: aparecer 0.9s ease-out forwards;
+  animation-delay: var(--retardo, 0s);
+}
+
+@keyframes aparecer {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes balanceo {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+
+/* Pétalos flotando de fondo, muy discretos */
+.petalos {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+.tarjeta {
+  position: relative;
+  z-index: 1;
+}
+.petalo {
+  position: absolute;
+  top: -8vh;
+  width: 10px;
+  height: 10px;
+  background: var(--color-rosa);
+  border-radius: 0 100% 0 100%;
+  opacity: 0.55;
+  animation-name: caer;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.p1 { left: 8%;  width: 8px;  height: 8px;  animation-duration: 16s; animation-delay: 0s; }
+.p2 { left: 28%; width: 11px; height: 11px; animation-duration: 21s; animation-delay: 3s; background: var(--color-azul); }
+.p3 { left: 52%; width: 7px;  height: 7px;  animation-duration: 18s; animation-delay: 6s; }
+.p4 { left: 74%; width: 10px; height: 10px; animation-duration: 24s; animation-delay: 1.5s; background: var(--color-rojo); opacity: 0.35; }
+.p5 { left: 90%; width: 9px;  height: 9px;  animation-duration: 19s; animation-delay: 8s; }
+
+@keyframes caer {
+  0%   { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+  10%  { opacity: 0.55; }
+  90%  { opacity: 0.4; }
+  100% { transform: translate(6vw, 116vh) rotate(180deg); opacity: 0; }
+}
+
+/* Respeto por accesibilidad: menos movimiento si el usuario lo prefiere */
+@media (prefers-reduced-motion: reduce) {
+  .decor-sway,
+  .petalo {
+    animation: none !important;
+  }
+  body.cargado .animar {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Pantallas muy bajas (móviles pequeños en horizontal o iPhone SE) */
+@media (max-height: 620px) {
+  .tarjeta { gap: 0.8vh; padding-top: 2vh; padding-bottom: 1.6vh; }
+  .decor-top { max-width: 200px; }
+  .foto-marco { width: clamp(100px, 24vh, 150px); }
+}

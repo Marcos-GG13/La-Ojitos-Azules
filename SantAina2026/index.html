@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Feliz Santo, Aina ❤️</title>
+  <meta name="description" content="Una pequeña carta digital para Aina" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+  <!-- Tipografías: una script para el título (cariñosa, escrita a mano),
+       una serif clásica para la carta y una sans para los detalles pequeños -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Montserrat:wght@500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Pétalos flotando muy sutilmente de fondo -->
+  <div class="petalos" aria-hidden="true">
+    <span class="petalo p1"></span>
+    <span class="petalo p2"></span>
+    <span class="petalo p3"></span>
+    <span class="petalo p4"></span>
+    <span class="petalo p5"></span>
+  </div>
+
+  <main class="tarjeta" id="tarjeta">
+
+    <!-- Decoración floral superior, dibujada a mano en SVG -->
+    <div class="decor-top" aria-hidden="true">
+      <svg viewBox="0 0 220 50" xmlns="http://www.w3.org/2000/svg" class="decor-svg">
+        <g class="decor-sway">
+          <path d="M18 30 Q 60 4, 96 22" class="rama" />
+          <path d="M34 25 Q 44 12, 54 22" class="rama fina" />
+          <path d="M60 20 Q 68 8, 78 18" class="rama fina" />
+
+          <g transform="translate(110 24)">
+            <ellipse cx="0" cy="-9" rx="5" ry="9" class="petalo-svg" />
+            <ellipse cx="0" cy="-9" rx="5" ry="9" class="petalo-svg" transform="rotate(72)" />
+            <ellipse cx="0" cy="-9" rx="5" ry="9" class="petalo-svg" transform="rotate(144)" />
+            <ellipse cx="0" cy="-9" rx="5" ry="9" class="petalo-svg" transform="rotate(216)" />
+            <ellipse cx="0" cy="-9" rx="5" ry="9" class="petalo-svg" transform="rotate(288)" />
+            <circle cx="0" cy="0" r="3.6" class="centro-flor" />
+          </g>
+
+          <path d="M202 30 Q 160 4, 124 22" class="rama" />
+          <path d="M186 25 Q 176 12, 166 22" class="rama fina" />
+          <path d="M160 20 Q 152 8, 142 18" class="rama fina" />
+        </g>
+      </svg>
+    </div>
+
+    <!-- Título -->
+    <header class="titulo animar" style="--retardo: 0.05s">
+      <h1>Feliz Santo, Aina <span class="corazon">❤️</span></h1>
+      <p class="subtitulo">Para mi Enana</p>
+    </header>
+
+    <!-- Foto de la flor -->
+    <section class="foto-wrapper animar" style="--retardo: 0.2s">
+      <div class="foto-marco" id="foto-marco">
+        <img src="flor.jpg" alt="La flor que le regalé a Aina" id="foto-flor" />
+        <div class="foto-vacia" id="foto-vacia" hidden>
+          <span>🌸</span>
+          <small>coloca aquí flor.jpg</small>
+        </div>
+      </div>
+      <span class="emblema" aria-hidden="true">🌸</span>
+    </section>
+
+    <!-- Carta con el mensaje personal -->
+    <section class="carta animar" style="--retardo: 0.35s">
+      <span class="sello" aria-hidden="true">❤</span>
+      <p class="carta-texto" id="mensaje-texto"></p>
+    </section>
+
+    <!-- Cuenta atrás para el reencuentro -->
+    <section class="cuenta-atras animar" style="--retardo: 0.5s">
+      <p class="cuenta-atras-texto">Cada día queda menos para volver a abrazarte ❤️</p>
+      <div class="cuenta-atras-tarjeta">
+        <div class="tiempo">
+          <span id="dias">00</span>
+          <small>días</small>
+        </div>
+        <div class="sep">:</div>
+        <div class="tiempo">
+          <span id="horas">00</span>
+          <small>horas</small>
+        </div>
+        <div class="sep">:</div>
+        <div class="tiempo">
+          <span id="minutos">00</span>
+          <small>min</small>
+        </div>
+        <div class="sep">:</div>
+        <div class="tiempo">
+          <span id="segundos">00</span>
+          <small>seg</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mensaje final -->
+    <footer class="mensaje-final animar" style="--retardo: 0.65s">
+      <p>Te quiero muchísimo, mi Enana <span class="corazon">❤️</span></p>
+    </footer>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
