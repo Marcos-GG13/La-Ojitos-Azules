@@ -82,10 +82,12 @@ body {
   opacity: 0.85;
 }
 .petalo-svg {
-  fill: var(--color-rosa);
+  fill: #ff9eb7;
+  stroke: #c97b85;
+  stroke-width: 2;
 }
 .centro-flor {
-  fill: var(--color-rojo);
+  fill: #c94d6a;
 }
 .decor-sway {
   transform-origin: center;
