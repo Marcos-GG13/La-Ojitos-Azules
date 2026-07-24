@@ -29,17 +29,21 @@ body {
 }
 
 body {
-  background: radial-gradient(circle at 15% 0%, var(--color-rosa) 0%, transparent 45%),
-    radial-gradient(circle at 100% 100%, var(--color-azul) 0%, transparent 40%),
+  background: 
+    radial-gradient(circle at 15% 20%, var(--color-rosa) 0%, transparent 65%),
+    radial-gradient(circle at 85% 75%, var(--color-azul) 0%, transparent 60%),
     var(--color-fondo);
+  background-size: 140% 140%, 160% 160%, cover;
+  background-position: center, center, center;
+  background-attachment: fixed;   /* ← Esto es clave para que no se corte */
   color: var(--color-texto);
   font-family: var(--fuente-carta);
-  overflow-y: auto; /* permite scroll vertical */
+  overflow-y: auto;
   display: flex;
   justify-content: center;
   -webkit-tap-highlight-color: transparent;
+  min-height: 100dvh;
 }
-
 /* =====================================================
    TARJETA — contenedor único, pensado para móvil vertical
 ===================================================== */
