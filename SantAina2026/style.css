@@ -177,8 +177,7 @@ body {
 
 /* Carta con el mensaje personal */
 .carta {
-  flex: 1 1 auto;
-  min-height: 0;
+  flex: 0 0 auto;           /* ← Cambiado: ya no ocupa el espacio sobrante */
   width: 100%;
   max-width: 340px;
   background: var(--color-papel);
@@ -186,10 +185,8 @@ body {
   box-shadow: var(--sombra-suave);
   padding: 1.6rem 1.2rem 1rem;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
+
 .sello {
   position: absolute;
   top: -0.7rem;
@@ -213,9 +210,8 @@ body {
   font-weight: 500;
   line-height: 1.5;
   white-space: pre-wrap;
-  overflow-y: auto;
-  max-height: 100%;
-  padding-right: 2px;
+  overflow-y: visible;     /* ← Cambiado */
+  max-height: none;        /* ← Cambiado */
 }
 .carta-texto::-webkit-scrollbar {
   width: 3px;
