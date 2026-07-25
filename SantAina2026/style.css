@@ -284,7 +284,8 @@ body {
   flex: 0 0 auto;
 }
 .mensaje-final p {
-  margin: 0;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
   font-family: var(--fuente-titulo);
   font-size: clamp(1.1rem, 4.6vw, 1.35rem);
   color: var(--color-rojo);
