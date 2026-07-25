@@ -4,22 +4,13 @@
    se mostrarán tal cual los escribas dentro de la carta.
 ===================================================== */
 const mensaje = `
-Mi querida Aina, mi Enana hermosa,
-
-Cada día sin ti se siente como una eternidad. Desde que nos conocimos, mi mundo cambió por completo. Eres esa persona que ilumina mis días más grises, la que me hace sonreír sin razón alguna y la razón por la que despierto cada mañana con ganas de ser mejor.
-
-Recuerdo perfectamente la primera vez que te vi, tu sonrisa tímida, tus ojos brillantes y esa forma tan especial que tienes de mirar el mundo. Desde entonces, no he dejado de pensar en ti ni un solo día. Tus risas, tus mensajes a deshoras, la forma en que me abrazas fuerte como si no quisieras soltarme nunca... todo eso se ha convertido en mis momentos favoritos.
-
-Aunque ahora estemos separados por la distancia, sé que pronto estaremos juntos de nuevo. Cada día que pasa me acerco más a ese momento tan esperado en el que podré volver a abrazarte, besarte y decirte en persona todo lo que siento por ti.
-
-Te quiero con todo mi corazón. Eres mi refugio, mi alegría, mi compañera de aventuras y la persona con la que quiero construir un futuro lleno de amor, risas y momentos inolvidables. Gracias por existir, gracias por elegirme y gracias por ser exactamente como eres.
-
-No veo la hora de contar los días que nos quedan juntos, de hacer planes, de viajar, de cocinar cosas ricas (aunque se me queme todo) y simplemente de estar a tu lado cada día.
-
-Este es solo un pequeño detalle para recordarte cuánto te amo y cuánto te extraño. Eres mi flor favorita en este jardín llamado vida.
-
-Con todo mi amor,
-Tu persona favorita ❤️
+Feliz santo mi niña preciosa,
+Ojalá pudiera estar ahora mismo contigo para darte infinitos besitos y abrazitos y para recordarte lo muchísimo que te amo y te adoro. Pero como no puede ser, he decidido escribirte este pequeño mensajito y programarte esta página web en forma de regalo para tu santo y para que sepas que, aunque estemos muy lejos el uno del otro, yo siempre te llevo en mi mente y en mi corazón (y en mi muñeca porque la goma no me la quito nunca  jejejeje).
+Solo quería felicitarte por tu santo y desearte un día estupendo miamor, y ya que estamos recordarte que eres la mujer de mis sueños y el amor de mi vida. Nunca he amado ni adorado a nadie como te adoro a ti miniña. Lo que siento por ti es totalmente real y puro, y sé que este sentimiento va a vivir dentro de mi corazón hasta que este mismo deje de latir. Gracias otra vez por ser tan buena persona, por tu forma de quererme y por explicarme mil veces todas las cosas que necesito y que a la primera no entiendo.
+Estoy muy orgulloso de ti amor, sé que te estás esforzando muchísimo con tus miedos y tus inseguridades, y sé que estás aprendiendo a confiar cada vez más. Y me alegro por ti y estoy muy orgulloso de que seas tan valiente como para afrontar esos miedos y de que sigas mejorando un poquito cada día. Quiero que sepas que, incluso aunque yo esté en la otra punta del mundo, siempre me vas a tener aquí para celebrar tus logros y apoyarte en tus momentos difíciles. Siempre que necesites una mano voy a estar aquí para dartela amor, y quiero recordarte que la distancia no va a hacer que deje de amarte a ti y SOLO a ti. Eso es algo que nada ni nadie en este mundo puede cambiar mivida, y te lo sello 😘🍍.
+Espero que tengas un día increible miamor y que disfrutes muchísimo de tu familia. Te echo muchísimo de menos miniña preciosa, de verdad que no sabes las ganas que tengo de verte, pero como ves aquí abajo, cada vez queda un poquito menos para que nos volvamos a ver amor. 
+Te adoro miniña preciosa, y te voy a adorar siempre.
+Con cariño, el amor de tu vida.
 `;
 
 /* =====================================================
