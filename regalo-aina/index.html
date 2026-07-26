@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Para Aina · Feliz Día Internacional de la Novia</title>
+  <meta name="description" content="Un regalo digital hecho a mano, con todo mi cariño, para Aina.">
+
+  <!-- =====================================================
+       TIPOGRAFÍAS
+       Playfair Display -> títulos elegantes
+       Poppins         -> textos y párrafos
+  ====================================================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- =====================================================
+       LIBRERÍAS DE ANIMACIÓN (sólo estas dos, vía CDN)
+       AOS  -> animaciones suaves al hacer scroll
+       GSAP -> animación de la caja de regalo y momentos especiales
+  ====================================================== -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" defer></script>
+
+  <!-- Estilos propios -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Emoji de corazón como icono de la pestaña -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9D%A4%EF%B8%8F%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+  <!-- Capa donde caen los pétalos de forma continua. La rellena script.js -->
+  <div class="petals-layer" id="petalsLayer" aria-hidden="true"></div>
+
+  <!-- Capa donde aparecen los corazones en momentos especiales -->
+  <div class="hearts-layer" id="heartsLayer" aria-hidden="true"></div>
+
+  <!-- =====================================================
+       1. PANTALLA INICIAL
+       Primera pantalla completa. Aparece la caja de regalo.
+  ====================================================== -->
+  <section id="inicio" class="screen screen--hero">
+    <div class="hero__decor hero__decor--left" aria-hidden="true">🌸</div>
+    <div class="hero__decor hero__decor--right" aria-hidden="true">🌸</div>
+
+    <div class="hero__content">
+      <!-- ✏️ EDITA AQUÍ el título de bienvenida -->
+      <p class="eyebrow">Un regalo hecho a mano, sólo para ti</p>
+      <h1 class="hero__title">Este regalo está hecho para una persona muy especial <span class="heart-inline">❤️</span></h1>
+      <p class="hero__subtitle">Hay personas que llegan a tu vida para cambiarlo todo. Tú hiciste exactamente eso.</p>
+
+      <!-- Caja de regalo animada (SVG). Al pulsar el botón, se abre. -->
+      <div class="gift-box" id="giftBox">
+        <svg class="gift-box__svg" viewBox="0 0 240 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Caja de regalo">
+          <!-- sombra suave -->
+          <ellipse cx="120" cy="205" rx="85" ry="12" fill="var(--color-text-dark)" opacity="0.08"></ellipse>
+          <!-- cuerpo de la caja -->
+          <rect class="gift-box__body" x="35" y="95" width="170" height="105" rx="14" fill="url(#boxGradient)"></rect>
+          <!-- lazo vertical -->
+          <rect x="108" y="95" width="24" height="105" fill="var(--color-red-soft)" opacity="0.85"></rect>
+          <!-- tapa de la caja (esto es lo que se abre) -->
+          <g class="gift-box__lid">
+            <rect x="25" y="65" width="190" height="38" rx="12" fill="url(#lidGradient)"></rect>
+            <rect x="108" y="65" width="24" height="38" fill="var(--color-red-soft)" opacity="0.9"></rect>
+            <!-- lazo -->
+            <path d="M120 65 C95 40, 70 45, 78 68 C86 82, 112 74, 120 65 Z" fill="var(--color-red-soft)"></path>
+            <path d="M120 65 C145 40, 170 45, 162 68 C154 82, 128 74, 120 65 Z" fill="var(--color-red-soft)"></path>
+            <circle cx="120" cy="66" r="9" fill="var(--color-red-soft)"></circle>
+          </g>
+          <defs>
+            <linearGradient id="boxGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#FBEEF2"></stop>
+              <stop offset="1" stop-color="#F6D9E3"></stop>
+            </linearGradient>
+            <linearGradient id="lidGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#E6F1F6"></stop>
+              <stop offset="1" stop-color="#CFE3EE"></stop>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <!-- Botón principal: dispara la animación de apertura -->
+      <button class="btn btn--primary" id="openGiftBtn" type="button">
+        Abrir el regalo
+      </button>
+    </div>
+  </section>
+
+  <!-- Todo el contenido siguiente se revela tras abrir el regalo -->
+  <main id="mainContent">
+
+    <!-- =====================================================
+         2. BIENVENIDA
+    ====================================================== -->
+    <section id="bienvenida" class="section section--center">
+      <div class="container container--narrow">
+        <p class="eyebrow" data-aos="fade-up">1 de agosto</p>
+        <h2 class="section__title" data-aos="fade-up" data-aos-delay="80">Feliz Día Internacional de la Novia <span class="heart-inline">❤️</span></h2>
+        <!-- ✏️ EDITA AQUÍ el texto de bienvenida -->
+        <p class="section__text" data-aos="fade-up" data-aos-delay="160">
+          Esta página no existe en ningún otro lugar del mundo. La he construido letra a letra,
+          recuerdo a recuerdo, pensando únicamente en ti. No hay plantilla, ni copia: es un rincón
+          hecho a mano para contarte, con calma, todo lo que normalmente no me da tiempo a decir.
+          Tómate tu tiempo para recorrerla. Es tuya.
+        </p>
+
+        <!-- Pequeño detalle: chips con cosas que le recuerdan a ella -->
+        <!-- ✏️ EDITA AQUÍ el título de esta lista -->
+        <p class="chips-title" data-aos="fade-up" data-aos-delay="200">Cosas que me recuerdan a ti</p>
+        <ul class="fact-chips" data-aos="fade-up" data-aos-delay="240">
+          <li class="fact-chip">🐾 Perros salchicha</li>
+          <li class="fact-chip">🌷 Lirios</li>
+          <li class="fact-chip">🌹 Rosas</li>
+          <li class="fact-chip">🎬 Pelis de miedo</li>
+          <li class="fact-chip">🍣 Sushi</li>
+          <li class="fact-chip">✈️ Viajar</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         3. CUATRO SOBRES
+    ====================================================== -->
+    <section id="sobres" class="section">
+      <div class="container">
+        <p class="eyebrow eyebrow--center" data-aos="fade-up">Cuatro cartas</p>
+        <h2 class="section__title section__title--center" data-aos="fade-up" data-aos-delay="80">Cosas que quiero que sepas</h2>
+        <p class="section__text section__text--center" data-aos="fade-up" data-aos-delay="140">
+          Toca cada sobre para abrirlo.
+        </p>
+
+        <div class="envelopes">
+          <!-- Sobre 1 -->
+          <button class="envelope" type="button" data-envelope="1" data-aos="zoom-in" data-aos-delay="0">
+            <span class="envelope__icon">💌</span>
+            <span class="envelope__title">Lo que más amo de ti</span>
+          </button>
+
+          <!-- Sobre 2 -->
+          <button class="envelope" type="button" data-envelope="2" data-aos="zoom-in" data-aos-delay="80">
+            <span class="envelope__icon">💌</span>
+            <span class="envelope__title">Lo que me haces sentir</span>
+          </button>
+
+          <!-- Sobre 3 -->
+          <button class="envelope" type="button" data-envelope="3" data-aos="zoom-in" data-aos-delay="160">
+            <span class="envelope__icon">💌</span>
+            <span class="envelope__title">Nuestros recuerdos</span>
+          </button>
+
+          <!-- Sobre 4 -->
+          <button class="envelope" type="button" data-envelope="4" data-aos="zoom-in" data-aos-delay="240">
+            <span class="envelope__icon">💌</span>
+            <span class="envelope__title">Nuestro futuro</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Plantillas con el contenido de cada carta. Ocultas, las usa script.js -->
+    <template id="tpl-envelope-1">
+      <p class="letter__label">💌 Lo que más amo de ti</p>
+      <!-- ✏️ EDITA AQUÍ el texto del sobre 1 -->
+      <p>Lo que más amo de ti es la forma en la que escuchas a los demás, con paciencia y sin juzgar nunca. Tienes una capacidad enorme para ponerte en el lugar de la gente, y eso hace que quien habla contigo se sienta comprendido de verdad.</p>
+      <p>Ayudas a quien lo necesita sin esperar nada a cambio, y quieres a las personas importantes para ti con una intensidad que pocas veces he visto. Además, eres divertidísima: sacas una sonrisa de la nada, incluso en los días complicados.</p>
+      <p>Y por si fuera poco, eres de las personas más cariñosas que conozco. Esa mezcla, empatía, humor y cariño, es lo que te hace tan especial.</p>
+    </template>
+
+    <template id="tpl-envelope-2">
+      <p class="letter__label">💌 Lo que me haces sentir</p>
+      <!-- ✏️ EDITA AQUÍ el texto del sobre 2 -->
+      <p>Contigo siento una paz que no sabía que existía. Cuando estoy a tu lado, todo se calma, como si el mundo bajara el ritmo sólo para nosotros dos.</p>
+      <p>Me haces feliz de una forma sencilla, sin necesidad de nada extraordinario, sólo con estar. Siento tranquilidad, siento ilusión por lo que viene, y unas ganas enormes de compartir mi vida contigo, cada parte de ella.</p>
+    </template>
+
+    <template id="tpl-envelope-3">
+      <p class="letter__label">💌 Nuestros recuerdos</p>
+      <!-- ✏️ EDITA AQUÍ el texto del sobre 3 -->
+      <p>Nos conocimos en el instituto, aunque entonces ninguno de los dos imaginaba lo que estaba a punto de empezar.</p>
+      <p>Recuerdo nuestro primer paseo cerca de tu casa como si fuera ayer: los nervios, las ganas de decir las cosas bien, las ganas de que no se acabara nunca.</p>
+      <p>Empezamos a hablar el 30 de marzo, y el 8 de abril nos dimos nuestro primer beso. Desde entonces, cada momento contigo se convierte en mi favorito... hasta que llega el siguiente.</p>
+    </template>
+
+    <template id="tpl-envelope-4">
+      <p class="letter__label">💌 Nuestro futuro</p>
+      <!-- ✏️ EDITA AQUÍ el texto del sobre 4 -->
+      <p>Quiero recorrer contigo todos los sitios que aún no hemos visto. Quiero que sigamos creando recuerdos, uno detrás de otro, hasta que perdamos la cuenta.</p>
+      <p>Quiero elegirte cada día, no sólo hoy. Y quiero que, durante muchísimo tiempo, sólo seamos tú y yo.</p>
+    </template>
+
+    <!-- =====================================================
+         4. GALERÍA (estilo Polaroid)
+    ====================================================== -->
+    <section id="galeria" class="section section--tinted">
+      <div class="container">
+        <p class="eyebrow eyebrow--center" data-aos="fade-up">Momentos</p>
+        <h2 class="section__title section__title--center" data-aos="fade-up" data-aos-delay="80">Nuestros recuerdos en imágenes</h2>
+        <p class="section__text section__text--center" data-aos="fade-up" data-aos-delay="140">Toca una foto para verla más grande.</p>
+
+        <!-- ✏️ Sustituye las imágenes en /img por vuestras fotos reales -->
+        <div class="gallery">
+          <button class="polaroid polaroid--1" type="button" data-full="img/foto1.jpg" data-aos="fade-up" data-aos-delay="0">
+            <img src="img/foto1.jpg" alt="Primer paseo juntos" loading="lazy">
+            <span class="polaroid__caption">Primer paseo</span>
+          </button>
+          <button class="polaroid polaroid--2" type="button" data-full="img/foto2.jpg" data-aos="fade-up" data-aos-delay="60">
+            <img src="img/foto2.jpg" alt="Selfie juntos" loading="lazy">
+            <span class="polaroid__caption">Selfie juntos</span>
+          </button>
+          <button class="polaroid polaroid--3" type="button" data-full="img/foto3.jpg" data-aos="fade-up" data-aos-delay="120">
+            <img src="img/foto3.jpg" alt="Abrazados" loading="lazy">
+            <span class="polaroid__caption">Abrazados</span>
+          </button>
+          <button class="polaroid polaroid--4" type="button" data-full="img/foto4.jpg" data-aos="fade-up" data-aos-delay="0">
+            <img src="img/foto4.jpg" alt="En el instituto" loading="lazy">
+            <span class="polaroid__caption">En el instituto</span>
+          </button>
+          <button class="polaroid polaroid--5" type="button" data-full="img/foto5.jpg" data-aos="fade-up" data-aos-delay="60">
+            <img src="img/foto5.jpg" alt="Besándonos" loading="lazy">
+            <span class="polaroid__caption">Besándonos</span>
+          </button>
+          <button class="polaroid polaroid--6" type="button" data-full="img/foto6.jpg" data-aos="fade-up" data-aos-delay="120">
+            <img src="img/foto6.jpg" alt="Nuestra foto favorita" loading="lazy">
+            <span class="polaroid__caption">Nuestra foto favorita</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         5. CONTADORES
+    ====================================================== -->
+    <section id="contadores" class="section">
+      <div class="container">
+        <p class="eyebrow eyebrow--center" data-aos="fade-up">Nuestro tiempo</p>
+        <h2 class="section__title section__title--center" data-aos="fade-up" data-aos-delay="80">Lo que llevamos y lo que queda</h2>
+
+        <div class="counters">
+          <div class="counter-card" data-aos="fade-up" data-aos-delay="0">
+            <span class="counter-card__number" id="counterTalking">0</span>
+            <span class="counter-card__label">días hablando desde el 30 de marzo</span>
+          </div>
+          <div class="counter-card" data-aos="fade-up" data-aos-delay="100">
+            <span class="counter-card__number" id="counterKiss">0</span>
+            <span class="counter-card__label">días desde nuestro primer beso</span>
+          </div>
+          <div class="counter-card counter-card--countdown" data-aos="fade-up" data-aos-delay="200">
+            <span class="counter-card__number" id="counterCountdown">--</span>
+            <span class="counter-card__label">para el 28 de agosto</span>
+          </div>
+        </div>
+
+        <p class="section__text section__text--center counters__footnote" data-aos="fade-up">
+          Cada día queda un poquito menos para volver a abrazarte.
+        </p>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         6. BOTÓN ESPECIAL
+    ====================================================== -->
+    <section id="momento-especial" class="section section--center section--tinted">
+      <div class="container container--narrow">
+        <h2 class="section__title section__title--center" data-aos="fade-up">¿Sabes cuánto te quiero?</h2>
+        <p class="section__text section__text--center" data-aos="fade-up" data-aos-delay="80">Pulsa el botón y compruébalo.</p>
+
+        <button class="btn btn--primary btn--big" id="specialBtn" type="button" data-aos="zoom-in" data-aos-delay="160">
+          ¿Sabes cuánto te quiero?
+        </button>
+
+        <!-- Se revela tras pulsar el botón (controlado por clases CSS, ver script.js) -->
+        <div class="reveal" id="specialReveal">
+          <svg class="reveal__heart" viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M50 82 C20 60, 2 40, 2 22 C2 6, 16 -2, 30 4 C40 8, 46 16, 50 24 C54 16, 60 8, 70 4 C84 -2, 98 6, 98 22 C98 40, 80 60, 50 82 Z" fill="var(--color-red-soft)"></path>
+          </svg>
+          <!-- ✏️ EDITA AQUÍ el mensaje que aparece -->
+          <p class="reveal__text">
+            Te quiero más de lo que estas palabras pueden explicar. Te quiero en los días fáciles
+            y en los difíciles, en lo pequeño y en lo grande. Te quiero, sencillamente, muchísimo.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         7. CARTA FINAL
+    ====================================================== -->
+    <section id="carta-final" class="section section--letter">
+      <div class="container container--narrow">
+        <div class="final-letter" data-aos="fade-up">
+          <span class="final-letter__quote" aria-hidden="true">“</span>
+          <!-- ✏️ EDITA AQUÍ la carta final. Debe terminar exactamente con la frase indicada -->
+          <p>Aina, o como me gusta llamarte, mi Enana:</p>
+          <p>
+            Hoy es un buen día para decirte, sin prisa y sin adornos, lo que siento de verdad.
+            Estoy orgulloso de la persona que eres: de tu forma de escuchar, de ayudar, de querer
+            a quienes te rodean sin medida. No es fácil encontrar a alguien así, y yo te encontré a ti.
+          </p>
+          <p>
+            Estoy agradecido por cada día que decides compartir conmigo. Por las conversaciones,
+            por las risas, por los silencios cómodos, por todo lo que hemos construido desde el
+            30 de marzo. Eres especial de una forma que no sé explicar del todo; sólo sé que
+            contigo todo pesa menos y todo tiene más sentido.
+          </p>
+          <p>
+            Soy feliz contigo. De una felicidad tranquila, de esas que no hacen ruido pero que se
+            nota en todo. Y significas para mí muchísimo más de lo que estas palabras pueden recoger.
+          </p>
+          <p class="final-letter__closing">Feliz Día Internacional de la Novia. Te quiero muchísimo, mi Enana ❤️</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Hecho a mano, con mucho cariño, para Aina.</p>
+    </footer>
+
+  </main>
+
+  <!-- =====================================================
+       MODAL: carta de un sobre
+  ====================================================== -->
+  <div class="modal" id="letterModal" aria-hidden="true">
+    <div class="modal__backdrop" data-close-modal></div>
+    <div class="modal__card" role="dialog" aria-modal="true" aria-labelledby="letterModalTitle">
+      <button class="modal__close" type="button" data-close-modal aria-label="Cerrar carta">✕</button>
+      <div class="modal__body" id="letterModalBody">
+        <!-- Contenido inyectado por script.js desde las plantillas -->
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================
+       MODAL: foto ampliada (lightbox)
+  ====================================================== -->
+  <div class="modal modal--photo" id="photoModal" aria-hidden="true">
+    <div class="modal__backdrop" data-close-modal></div>
+    <div class="modal__photo-card">
+      <button class="modal__close" type="button" data-close-modal aria-label="Cerrar imagen">✕</button>
+      <img id="photoModalImg" src="" alt="">
+    </div>
+  </div>
+
+  <script src="js/script.js" defer></script>
+</body>
+</html>

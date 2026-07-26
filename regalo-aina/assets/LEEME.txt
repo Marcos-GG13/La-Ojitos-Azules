@@ -1,0 +1,11 @@
+Esta carpeta queda disponible para recursos extra opcionales,
+por ejemplo:
+
+- Una fuente tipográfica descargada en local (si en algún momento
+  no quieres depender de Google Fonts).
+- Algún icono o decoración extra en formato SVG/PNG.
+
+Ahora mismo la página no necesita nada aquí para funcionar: las
+tipografías se cargan desde Google Fonts y todos los efectos
+(pétalos, corazones, caja de regalo) se generan con CSS y JavaScript,
+sin archivos adicionales.

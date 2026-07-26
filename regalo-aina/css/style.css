@@ -1,0 +1,837 @@
+/* ============================================================
+   REGALO PARA AINA — HOJA DE ESTILOS
+   ------------------------------------------------------------
+   Organización del archivo:
+   1. Reset y variables (tokens de diseño)
+   2. Tipografía general
+   3. Utilidades (contenedores, botones, secciones)
+   4. Capas de pétalos y corazones
+   5. Pantalla inicial + caja de regalo
+   6. Bienvenida + chips de datos curiosos
+   7. Sobres (cartas)
+   8. Galería tipo Polaroid
+   9. Contadores
+   10. Botón especial / revelado
+   11. Carta final
+   12. Modales (carta y foto)
+   13. Media queries (tablet / escritorio)
+   14. Accesibilidad (reduced motion, foco)
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1. RESET Y VARIABLES
+------------------------------------------------------------ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+:root {
+  /* --- Paleta (única, según lo solicitado) --- */
+  --color-white: #FFFFFF;
+  --color-cream: #FFFCFA;          /* blanco cálido para fondos */
+  --color-blue-pastel: #CFE3EE;    /* azul pastel */
+  --color-blue-pastel-soft: #E9F3F8;
+  --color-pink-pastel: #F6D9E3;    /* rosa pastel */
+  --color-pink-pastel-soft: #FCEEF3;
+  --color-red-soft: #E8B7B7;       /* rojo muy suave */
+  --color-red-soft-dark: #D89A9A;
+
+  /* --- Texto --- */
+  --color-text-dark: #4A3B3E;
+  --color-text-medium: #7C6B6E;
+  --color-text-light: #A99BA0;
+
+  /* --- Tipografía --- */
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Poppins', sans-serif;
+
+  /* --- Espaciados (escala fluida) --- */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.75rem;
+  --space-lg: 3rem;
+  --space-xl: 5rem;
+
+  /* --- Bordes y sombras --- */
+  --radius-sm: 14px;
+  --radius-md: 22px;
+  --radius-lg: 32px;
+  --shadow-soft: 0 10px 30px rgba(74, 59, 62, 0.10);
+  --shadow-softer: 0 6px 18px rgba(74, 59, 62, 0.08);
+
+  /* --- Transiciones --- */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 0.3s;
+  --dur-med: 0.6s;
+  --dur-slow: 1s;
+}
+
+/* ------------------------------------------------------------
+   2. TIPOGRAFÍA GENERAL
+------------------------------------------------------------ */
+body {
+  font-family: var(--font-body);
+  color: var(--color-text-dark);
+  background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-blue-pastel-soft) 45%, var(--color-pink-pastel-soft) 100%);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0;
+  color: var(--color-text-dark);
+}
+
+p {
+  margin: 0 0 var(--space-sm) 0;
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-red-soft-dark);
+  font-weight: 500;
+  margin-bottom: var(--space-xs);
+}
+
+.eyebrow--center { text-align: center; }
+
+.heart-inline {
+  display: inline-block;
+  animation: pulse-heart 1.8s ease-in-out infinite;
+}
+
+@keyframes pulse-heart {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+/* ------------------------------------------------------------
+   3. UTILIDADES: CONTENEDORES, BOTONES, SECCIONES
+------------------------------------------------------------ */
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+.container--narrow {
+  max-width: 720px;
+}
+
+.section {
+  position: relative;
+  padding: var(--space-xl) 0;
+}
+
+.section--center {
+  display: flex;
+  align-items: center;
+  min-height: 60vh;
+}
+
+/* Centra también los elementos "inline" (como los botones) dentro de
+   estas secciones, para que no queden pegados al lado izquierdo */
+.section--center .container {
+  text-align: center;
+}
+
+.section--tinted {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.section__title {
+  font-size: clamp(1.7rem, 5vw + 0.5rem, 2.75rem);
+  margin-bottom: var(--space-sm);
+}
+
+.section__title--center { text-align: center; }
+
+.section__text {
+  font-size: 1.02rem;
+  color: var(--color-text-medium);
+  max-width: 62ch;
+}
+
+.section__text--center {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* --- Botones --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: none;
+  border-radius: 100px;
+  padding: 0.95rem 2.1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: var(--font-body);
+  transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+}
+
+.btn--primary {
+  background: linear-gradient(135deg, var(--color-pink-pastel) 0%, var(--color-blue-pastel) 100%);
+  color: var(--color-text-dark);
+  box-shadow: var(--shadow-soft);
+}
+
+.btn--primary:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 16px 34px rgba(74, 59, 62, 0.16);
+}
+
+.btn--primary:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+.btn--big {
+  padding: 1.15rem 2.6rem;
+  font-size: 1.05rem;
+}
+
+/* ------------------------------------------------------------
+   4. CAPAS DE PÉTALOS Y CORAZONES
+   (los elementos individuales los crea js/script.js)
+------------------------------------------------------------ */
+.petals-layer,
+.hearts-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  overflow: hidden;
+}
+
+.hearts-layer { z-index: 60; }
+
+.petal {
+  position: absolute;
+  top: -5%;
+  will-change: transform, opacity;
+  opacity: 0.85;
+  filter: drop-shadow(0 2px 4px rgba(74,59,62,0.06));
+}
+
+.floating-heart {
+  position: absolute;
+  will-change: transform, opacity;
+  opacity: 0;
+}
+
+/* Animación genérica de caída para cada pétalo.
+   Las variables --drift-x, --rot y --fall-duration las fija script.js
+   en cada pétalo para que el movimiento sea distinto y natural. */
+@keyframes petal-fall {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(var(--drift-x, 40px), 115vh) rotate(var(--rot, 220deg));
+    opacity: 0;
+  }
+}
+
+.petal {
+  animation-name: petal-fall;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+/* Animación de un corazón flotando hacia arriba y desvaneciéndose,
+   usada en los "momentos especiales" de la página. */
+@keyframes heart-float {
+  0% {
+    transform: translate(0, 0) scale(0.6);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--drift-x, 0px), -70vh) scale(1);
+    opacity: 0;
+  }
+}
+
+.floating-heart {
+  animation-name: heart-float;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+
+/* ------------------------------------------------------------
+   5. PANTALLA INICIAL + CAJA DE REGALO
+------------------------------------------------------------ */
+.screen--hero {
+  min-height: 100svh;
+  min-height: 100vh; /* fallback */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: var(--space-lg) var(--space-md);
+  overflow: hidden;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero__title {
+  font-size: clamp(1.9rem, 6vw + 0.4rem, 3.2rem);
+  margin-bottom: var(--space-sm);
+}
+
+.hero__subtitle {
+  color: var(--color-text-medium);
+  font-size: 1.05rem;
+  max-width: 46ch;
+  margin-bottom: var(--space-md);
+}
+
+.hero__decor {
+  position: absolute;
+  font-size: 2.4rem;
+  opacity: 0.35;
+  filter: saturate(0.7);
+  animation: sway 6s ease-in-out infinite;
+  z-index: 1;
+}
+.hero__decor--left { top: 10%; left: 6%; }
+.hero__decor--right { bottom: 12%; right: 8%; animation-delay: -3s; }
+
+@keyframes sway {
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50% { transform: translateY(-14px) rotate(4deg); }
+}
+
+/* Caja de regalo */
+.gift-box {
+  width: min(240px, 60vw);
+  margin: var(--space-md) 0;
+  cursor: pointer;
+}
+
+.gift-box__svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.gift-box__lid {
+  transform-origin: 108px 100px; /* bisagra en el borde trasero de la tapa */
+  transition: transform var(--dur-slow) var(--ease);
+}
+
+/* Estado abierto (clase añadida por JS) */
+.gift-box.is-open .gift-box__lid {
+  transform: rotate(-115deg) translate(-10px, -6px);
+}
+
+.gift-box.is-open .gift-box__body {
+  animation: box-settle var(--dur-med) var(--ease);
+}
+
+@keyframes box-settle {
+  0% { transform: translateY(0); }
+  40% { transform: translateY(4px); }
+  100% { transform: translateY(0); }
+}
+
+/* El resto de la página permanece completamente oculto hasta que
+   se pulsa la caja de regalo o el botón "Abrir el regalo".
+   Esto evita que se pueda hacer scroll y ver el contenido antes de tiempo. */
+#mainContent {
+  display: none;
+}
+
+body.gift-opened #mainContent {
+  display: block;
+}
+
+/* ------------------------------------------------------------
+   6. BIENVENIDA + CHIPS
+------------------------------------------------------------ */
+.chips-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--color-text-dark);
+  text-align: center;
+  margin: var(--space-md) 0 0 0;
+}
+
+.fact-chips {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0;
+  margin: var(--space-xs) 0 0 0;
+}
+
+.fact-chip {
+  position: relative;
+  background: var(--color-white);
+  border: 1px solid rgba(74, 59, 62, 0.08);
+  border-radius: 100px;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  color: var(--color-text-medium);
+  box-shadow: var(--shadow-softer);
+  transition: transform var(--dur-fast) var(--ease);
+}
+
+.fact-chip:hover {
+  transform: translateY(-3px);
+  color: var(--color-text-dark);
+}
+
+/* ------------------------------------------------------------
+   7. SOBRES (CARTAS)
+------------------------------------------------------------ */
+.envelopes {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+}
+
+.envelope {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--color-white);
+  border: 1px solid rgba(74, 59, 62, 0.06);
+  border-radius: var(--radius-md);
+  padding: 1.4rem 1.6rem;
+  text-align: left;
+  box-shadow: var(--shadow-softer);
+  transition: transform var(--dur-med) var(--ease), box-shadow var(--dur-med) var(--ease);
+}
+
+.envelope:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-soft);
+}
+
+.envelope__icon {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+
+.envelope__title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------
+   8. GALERÍA TIPO POLAROID
+------------------------------------------------------------ */
+.gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg) var(--space-md);
+  margin-top: var(--space-lg);
+  justify-items: center;
+}
+
+.polaroid {
+  background: var(--color-white);
+  padding: 0.9rem 0.9rem 1.4rem 0.9rem;
+  border-radius: 6px;
+  box-shadow: var(--shadow-soft);
+  border: none;
+  max-width: 280px;
+  width: 100%;
+  transition: transform var(--dur-med) var(--ease), box-shadow var(--dur-med) var(--ease);
+}
+
+.polaroid img {
+  border-radius: 3px;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  width: 100%;
+}
+
+.polaroid__caption {
+  display: block;
+  text-align: center;
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--color-text-medium);
+  margin-top: 0.6rem;
+  font-size: 0.95rem;
+}
+
+/* Ligera inclinación aleatoria, estilo fotos esparcidas */
+.polaroid--1 { transform: rotate(-3deg); }
+.polaroid--2 { transform: rotate(2deg); }
+.polaroid--3 { transform: rotate(-2deg); }
+.polaroid--4 { transform: rotate(3deg); }
+.polaroid--5 { transform: rotate(-4deg); }
+.polaroid--6 { transform: rotate(2deg); }
+
+.polaroid:hover {
+  transform: rotate(0deg) scale(1.04) translateY(-6px);
+  box-shadow: 0 20px 40px rgba(74, 59, 62, 0.18);
+}
+
+/* ------------------------------------------------------------
+   9. CONTADORES
+------------------------------------------------------------ */
+.counters {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+}
+
+.counter-card {
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  text-align: center;
+  box-shadow: var(--shadow-softer);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.counter-card__number {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 2.8rem);
+  font-weight: 700;
+  color: var(--color-red-soft-dark);
+  font-variant-numeric: tabular-nums;
+}
+
+.counter-card--countdown .counter-card__number {
+  font-size: clamp(1.4rem, 4vw, 1.9rem);
+  color: var(--color-text-dark);
+}
+
+.counter-card__label {
+  color: var(--color-text-medium);
+  font-size: 0.92rem;
+}
+
+.counters__footnote {
+  margin-top: var(--space-lg);
+  font-style: italic;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--color-text-dark);
+}
+
+/* ------------------------------------------------------------
+   10. BOTÓN ESPECIAL / REVELADO
+------------------------------------------------------------ */
+/* Oculto por defecto: script.js añade las clases is-visible / is-animated
+   al pulsar el botón, así el mensaje y el corazón sólo aparecen entonces */
+.reveal {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  margin-top: var(--space-lg);
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--dur-med) var(--ease), transform var(--dur-med) var(--ease);
+}
+
+.reveal.is-visible {
+  display: flex;
+}
+
+.reveal.is-animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal__heart {
+  width: 90px;
+  height: auto;
+  margin-bottom: var(--space-md);
+  opacity: 0;
+  transform: scale(0.3);
+}
+
+@keyframes heart-pop {
+  0%   { transform: scale(0.3); opacity: 0; }
+  60%  { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.reveal.is-animated .reveal__heart {
+  animation: heart-pop 0.7s var(--ease) forwards;
+  animation-delay: 0.15s;
+}
+
+.reveal__text {
+  max-width: 50ch;
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 3vw, 1.4rem);
+  font-style: italic;
+  color: var(--color-text-dark);
+  text-align: center;
+}
+
+/* Fondo que cambia ligeramente durante el momento especial */
+body.special-moment {
+  background: linear-gradient(180deg, var(--color-pink-pastel-soft) 0%, var(--color-blue-pastel-soft) 100%);
+  transition: background var(--dur-slow) var(--ease);
+}
+
+/* ------------------------------------------------------------
+   11. CARTA FINAL
+------------------------------------------------------------ */
+.section--letter {
+  padding-bottom: var(--space-lg);
+}
+
+.final-letter {
+  position: relative;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg) var(--space-md);
+  box-shadow: var(--shadow-soft);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  line-height: 1.9;
+  color: var(--color-text-dark);
+}
+
+.final-letter__quote {
+  position: absolute;
+  top: -0.5rem;
+  left: 1.4rem;
+  font-size: 5rem;
+  color: var(--color-pink-pastel);
+  font-family: var(--font-display);
+  line-height: 1;
+  user-select: none;
+}
+
+.final-letter__closing {
+  margin-top: var(--space-md);
+  font-weight: 600;
+  font-style: italic;
+}
+
+.footer {
+  text-align: center;
+  padding: var(--space-lg) var(--space-md);
+  color: var(--color-text-light);
+  font-size: 0.85rem;
+}
+
+/* ------------------------------------------------------------
+   12. MODALES (carta y foto)
+------------------------------------------------------------ */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-med) var(--ease);
+}
+
+.modal.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(74, 59, 62, 0.35);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.modal__card {
+  position: relative;
+  background: var(--color-cream);
+  border-radius: var(--radius-lg);
+  max-width: 560px;
+  width: 100%;
+  max-height: 82vh;
+  overflow-y: auto;
+  padding: var(--space-lg) var(--space-md) var(--space-md);
+  box-shadow: 0 30px 60px rgba(74, 59, 62, 0.25);
+  transform: translateY(30px) scale(0.97);
+  opacity: 0;
+  transition: transform var(--dur-med) var(--ease), opacity var(--dur-med) var(--ease);
+}
+
+.modal.is-visible .modal__card {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.modal__close {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: var(--color-white);
+  color: var(--color-text-medium);
+  font-size: 1rem;
+  box-shadow: var(--shadow-softer);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--dur-fast) var(--ease);
+}
+
+.modal__close:hover { transform: rotate(90deg); }
+
+.modal__body {
+  font-family: var(--font-display);
+  font-size: 1.08rem;
+  line-height: 1.85;
+  color: var(--color-text-dark);
+}
+
+.letter__label {
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.78rem;
+  color: var(--color-red-soft-dark);
+  font-weight: 600;
+  margin-bottom: var(--space-sm);
+}
+
+.modal--photo .modal__photo-card {
+  position: relative;
+  max-width: 640px;
+  width: 100%;
+}
+
+.modal--photo img {
+  width: 100%;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 30px 60px rgba(74, 59, 62, 0.3);
+  transform: scale(0.96);
+  opacity: 0;
+  transition: transform var(--dur-med) var(--ease), opacity var(--dur-med) var(--ease);
+}
+
+.modal--photo.is-visible img {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.modal--photo .modal__close {
+  top: -50px;
+  right: 0;
+  background: var(--color-cream);
+}
+
+/* ------------------------------------------------------------
+   13. MEDIA QUERIES — TABLET Y ESCRITORIO
+   (mobile-first: el bloque de arriba ya cubre el móvil)
+------------------------------------------------------------ */
+@media (min-width: 640px) {
+  .envelopes {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .counters {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  body { background-attachment: fixed; }
+
+  .container { padding: 0 var(--space-lg); }
+
+  .gallery {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .hero__title { max-width: 14ch; margin-left: auto; margin-right: auto; }
+
+  .section { padding: calc(var(--space-xl) * 1.2) 0; }
+}
+
+@media (min-width: 1200px) {
+  .gallery { gap: var(--space-lg); }
+}
+
+/* ------------------------------------------------------------
+   14. ACCESIBILIDAD
+------------------------------------------------------------ */
+:focus-visible {
+  outline: 2px solid var(--color-red-soft-dark);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .petals-layer, .hearts-layer { display: none; }
+}

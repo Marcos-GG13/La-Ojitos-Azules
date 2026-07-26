@@ -1,0 +1,24 @@
+Esta carpeta contiene 6 fotos de EJEMPLO (foto1.jpg a foto6.jpg)
+generadas automáticamente sólo para que la galería se vea bien
+la primera vez que abras la página.
+
+Para poner vuestras fotos reales:
+
+1. Prepara 6 fotos vuestras (recomendado: formato vertical, 4:5,
+   por ejemplo 900x1125 px, para que encajen perfectamente en las
+   tarjetas tipo Polaroid).
+
+2. Ponles estos nombres exactos y sustituye los archivos de esta carpeta:
+
+   foto1.jpg  -> Primer paseo
+   foto2.jpg  -> Selfie juntos
+   foto3.jpg  -> Abrazados
+   foto4.jpg  -> En el instituto
+   foto5.jpg  -> Besándonos
+   foto6.jpg  -> Nuestra foto favorita
+
+3. Si quieres cambiar los pies de foto (los textos debajo de cada
+   imagen) o el orden, edita la sección "GALERÍA" dentro de index.html
+   (busca el comentario "4. GALERÍA").
+
+¡Eso es todo! No hace falta tocar el CSS ni el JS para cambiar fotos.
