@@ -26,7 +26,15 @@ const CONFIG = {
  * Ejemplo: "imagenes/dia1.jpg"
  */
 const DIAS = [
-  { dia: 1,  texto: "TEAMOOOOOOO", foto: "imagenes/dia1.jpg" },
+  { 
+    dia: 1, 
+    texto: `Hoy empieza nuestra cuenta atrás para Navidad y no quería dejar pasar ni un segundo sin recordarte lo muchísimo que te quiero. 
+
+A veces el día a día va tan rápido que se nos olvida parar y agradecer lo que tenemos, pero hoy quiero hacerlo contigo. Eres lo mejor que me ha pasado y cada momento a tu lado se siente como un regalo. 
+
+Prepárate, porque durante estos 24 días voy a ir dejándote por aquí pequeños trocitos de todo lo que siento por ti. ¡TEAMOOOOOOO!`, 
+    foto: "imagenes/dia1.jpg" 
+  },
   { dia: 2,  texto: "Hoy solo quería recordarte lo mucho que me haces sonreír.", foto: "" },
   { dia: 3,  texto: "Eres mi persona favorita.", foto: "" },
   { dia: 4,  texto: "Gracias por estar siempre.", foto: "" },
