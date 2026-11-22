@@ -109,21 +109,31 @@ img {
     transform: translateY(-100px);
 }
 
+.envoltorio:has(.sobre.abierto) .btn-continuar {
+    margin-top: 2.5rem;
+}
+
 .sobre {
     position: relative;
-
     width: min(280px, 78vw);
-    aspect-ratio: 1.4 / 1;
+    height: 200px;
 
     flex-shrink: 0;
-
     border: none;
     background: transparent;
     cursor: pointer;
     perspective: 800px;
 
-    transition: transform 0.3s ease;
+    transition:
+        height 0.6s ease,
+        transform 0.3s ease;
+    overflow: visible;
 }
+
+.sobre.abierto {
+    height: 380px;
+}
+
 .sobre:hover {
   transform: scale(1.03);
 }
@@ -133,19 +143,25 @@ img {
 }
 
 .sobre-fondo {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(160deg, #2a1f30, #1a1220);
-  border-radius: 8px;
-  box-shadow: 0 20px 40px var(--sombra);
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(160deg, #2a1f30, #1a1220);
+    border-radius: 8px;
+    box-shadow: 0 20px 40px var(--sombra);
+
+    z-index: 0;
 }
 
 .carta {
     position: absolute;
+
     left: 8%;
     right: 8%;
     top: 12%;
-    bottom: 28%;
+    bottom: 8%;
+
+    box-sizing: border-box;
 
     background: var(--carta);
     border-radius: 4px;
@@ -162,6 +178,7 @@ img {
     opacity: 0;
 
     transform-origin: bottom center;
+
     transition:
         transform 0.7s ease,
         opacity 0.4s ease;
@@ -170,9 +187,8 @@ img {
     pointer-events: none;
 }
 
-/* La carta aparece únicamente al abrir el sobre */
 .sobre.abierto .carta {
-    transform: translateY(-33%);
+    transform: translateY(-50px);
     opacity: 1;
 }
 
@@ -189,16 +205,33 @@ img {
 }
 
 .sobre-frente {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(165deg, #3d2a3a 0%, #2a1a28 100%);
-  border-radius: 8px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: 1.1rem;
-  z-index: 2;
-  clip-path: polygon(0 35%, 50% 55%, 100% 35%, 100% 100%, 0 100%);
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 130px;
+
+    background: linear-gradient(165deg, #3d2a3a 0%, #2a1a28 100%);
+    border-radius: 8px;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    padding-bottom: 1.1rem;
+    box-sizing: border-box;
+
+    z-index: 2;
+
+    clip-path: polygon(
+        0 0,
+        50% 40%,
+        100% 0,
+        100% 100%,
+        0 100%
+    );
 }
 
 .sobre-nombre {
@@ -209,21 +242,25 @@ img {
 }
 
 .sobre-solapa {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 48%;
-  background: linear-gradient(175deg, #4a3348, #2e1f2e);
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-  border-radius: 8px 8px 0 0;
-  z-index: 3;
-  transform-origin: top center;
-  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 96px;
+
+    background: linear-gradient(175deg, #4a3348, #2e1f2e);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    border-radius: 8px 8px 0 0;
+
+    z-index: 3;
+
+    transform-origin: top center;
+    transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .sobre.abierto .sobre-solapa {
-  transform: rotateX(180deg);
+    transform: rotateX(180deg);
 }
 
 .sobre-lacre {
@@ -781,6 +818,8 @@ img {
 
     animation: aparecer 0.7s ease;
     transition: transform 0.25s ease;
+    margin-top: 2rem;
+    transition: margin-top 0.6s ease;
 }
 
 .btn-continuar:hover {
