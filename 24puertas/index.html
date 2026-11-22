@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>24 Puertas · Para ti</title>
+  <meta name="description" content="24 sorpresas, una para cada día de diciembre" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <!-- ========== SOBRE INICIAL ========== -->
+  <div id="envoltorio" class="envoltorio">
+    <div class="envoltorio-centro">
+      <p class="envoltorio-saludo" id="saludo-sobre">Te ha escrito algo</p>
+
+      <button type="button" class="sobre" id="btn-sobre" aria-label="Abrir el sobre">
+        <div class="sobre-fondo"></div>
+        <div class="carta">
+          <p class="carta-para">Hola, <span id="carta-nombre">Amor</span></p>
+          <p class="carta-texto">24 puertas, una para cada día de diciembre</p>
+        </div>
+        <div class="sobre-frente">
+          <span class="sobre-nombre">Para <span id="sobre-nombre">Amor</span></span>
+        </div>
+        <div class="sobre-solapa"></div>
+        <div class="sobre-lacre">24</div>
+      </button>
+
+      <p class="envoltorio-indicacion">Toca el sello para abrirlo</p>
+    </div>
+  </div>
+
+  <!-- ========== CALENDARIO ========== -->
+  <main id="calendario" class="calendario oculto">
+    <header class="cabecera">
+      <h1 class="titulo">
+        <span class="titulo-palabra">Para</span>
+        <span id="nombre-para">Amor</span>
+      </h1>
+      <p class="subtitulo">Con cariño, <span id="nombre-de">Yo</span></p>
+    </header>
+
+    <section class="puertas-contenedor" aria-label="Las 24 puertas">
+      <div class="puertas-rejilla" id="rejilla-puertas">
+        <!-- Las puertas se generan con JavaScript -->
+      </div>
+    </section>
+
+    <footer class="pie">
+      <p>Cada día se abre una puerta nueva. ¡Feliz diciembre!</p>
+    </footer>
+  </main>
+
+  <!-- ========== MODAL DE CONTENIDO ========== -->
+  <dialog id="modal" class="modal">
+    <div class="modal-contenido">
+      <button type="button" class="modal-cerrar" id="btn-cerrar" aria-label="Cerrar">×</button>
+      
+      <div class="modal-numero" id="modal-numero">1</div>
+      
+      <div class="modal-cuerpo">
+        <img id="modal-foto" class="modal-foto oculto" alt="Foto del día" />
+        <p id="modal-texto" class="modal-texto"></p>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ========== TOAST / MENSAJES ========== -->
+  <div id="toast" class="toast oculto"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
