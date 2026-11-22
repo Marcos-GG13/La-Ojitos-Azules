@@ -51,46 +51,79 @@ img {
 /* ========== SOBRE INICIAL ========== */
 
 .envoltorio {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: radial-gradient(ellipse at center, #1a1220 0%, #0a080f 70%);
-  transition: opacity 0.6s ease, visibility 0.6s ease;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: radial-gradient(
+        ellipse at center,
+        #1a1220 0%,
+        #0a080f 70%
+    );
+
+    transition: opacity 0.6s ease, visibility 0.6s ease;
 }
 
 .envoltorio.cerrado {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
 }
 
 .envoltorio-centro {
-  text-align: center;
-  padding: 1.5rem;
+    width: 100%;
+    min-height: 100dvh;
+    padding: 2rem 1.5rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    overflow: visible;
 }
 
 .envoltorio-saludo {
-  font-family: "Playfair Display", serif;
-  font-size: 1.15rem;
-  color: var(--texto-suave);
-  margin-bottom: 1.75rem;
-  letter-spacing: 0.02em;
+    font-family: "Playfair Display", serif;
+    font-size: 1.15rem;
+    color: var(--texto-suave);
+
+    margin-bottom: 3.5rem;
+    letter-spacing: 0.02em;
+
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    width: 100%;
+    transform: translateY(0);
+    transition: transform 0.7s ease;
+}
+
+/* El título sube cuando se abre el sobre */
+.envoltorio:has(.sobre.abierto) .envoltorio-saludo {
+    transform: translateY(-100px);
 }
 
 .sobre {
-  position: relative;
-  width: min(280px, 78vw);
-  aspect-ratio: 1.4 / 1;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  perspective: 800px;
-  transition: transform 0.3s ease;
-}
+    position: relative;
 
+    width: min(280px, 78vw);
+    aspect-ratio: 1.4 / 1;
+
+    flex-shrink: 0;
+
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    perspective: 800px;
+
+    transition: transform 0.3s ease;
+}
 .sobre:hover {
   transform: scale(1.03);
 }
@@ -108,22 +141,39 @@ img {
 }
 
 .carta {
-  position: absolute;
-  left: 8%;
-  right: 8%;
-  top: 12%;
-  bottom: 28%;
-  background: var(--carta);
-  border-radius: 4px;
-  padding: 1rem 0.9rem;
-  color: #2a2218;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 0.4rem;
-  transform-origin: bottom center;
-  transition: transform 0.5s ease;
-  z-index: 1;
+    position: absolute;
+    left: 8%;
+    right: 8%;
+    top: 12%;
+    bottom: 28%;
+
+    background: var(--carta);
+    border-radius: 4px;
+    padding: 1rem 0.9rem;
+
+    color: #2a2218;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.4rem;
+
+    transform: translateY(0);
+    opacity: 0;
+
+    transform-origin: bottom center;
+    transition:
+        transform 0.7s ease,
+        opacity 0.4s ease;
+
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* La carta aparece únicamente al abrir el sobre */
+.sobre.abierto .carta {
+    transform: translateY(-33%);
+    opacity: 1;
 }
 
 .carta-para {
@@ -174,10 +224,6 @@ img {
 
 .sobre.abierto .sobre-solapa {
   transform: rotateX(180deg);
-}
-
-.sobre.abierto .carta {
-  transform: translateY(-35%);
 }
 
 .sobre-lacre {
@@ -704,4 +750,47 @@ img {
   .modal-foto {
     max-height: 180px;
   }
+}
+
+/* BOTÓN PARA CONTINUAR AL CALENDARIO */
+
+.btn-continuar {
+    display: block;
+    position: relative;
+
+    margin: 2rem auto 0;
+    padding: 14px 28px;
+
+    border: 1px solid var(--dorado);
+    border-radius: 999px;
+
+    background: linear-gradient(
+        145deg,
+        var(--rojo),
+        var(--rojo-oscuro)
+    );
+
+    color: white;
+    font-family: "Inter", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow: 0 5px 20px rgba(194, 59, 59, 0.3);
+
+    animation: aparecer 0.7s ease;
+    transition: transform 0.25s ease;
+}
+
+.btn-continuar:hover {
+    transform: scale(1.05);
+}
+
+.btn-continuar:active {
+    transform: scale(0.97);
+}
+
+.btn-continuar.oculto {
+    display: none !important;
 }

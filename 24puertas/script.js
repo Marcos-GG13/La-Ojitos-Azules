@@ -337,25 +337,52 @@ function cerrarModal() {
 // ---------- Sobre ----------
 
 function configurarSobre() {
-  const btnSobre = document.getElementById("btn-sobre");
-  const envoltorio = document.getElementById("envoltorio");
-  const calendario = document.getElementById("calendario");
+    const btnSobre = document.getElementById("btn-sobre");
+    const btnContinuar = document.getElementById("btn-continuar");
 
-  // Rellenar nombres
-  document.getElementById("carta-nombre").textContent = CONFIG.para;
-  document.getElementById("sobre-nombre").textContent = CONFIG.para;
-  document.getElementById("saludo-sobre").textContent = `${CONFIG.de} te ha escrito algo`;
-  document.getElementById("nombre-para").textContent = CONFIG.para;
-  document.getElementById("nombre-de").textContent = CONFIG.de;
+    const envoltorio = document.getElementById("envoltorio");
+    const calendario = document.getElementById("calendario");
 
-  btnSobre.addEventListener("click", () => {
-    btnSobre.classList.add("abierto");
+    // Rellenar nombres
+    document.getElementById("carta-nombre").textContent = CONFIG.para;
+    document.getElementById("sobre-nombre").textContent = CONFIG.para;
+    document.getElementById("saludo-sobre").textContent =
+        `${CONFIG.de} te ha escrito algo`;
 
-    setTimeout(() => {
-      envoltorio.classList.add("cerrado");
-      calendario.classList.remove("oculto");
-    }, 700);
-  });
+    document.getElementById("nombre-para").textContent = CONFIG.para;
+    document.getElementById("nombre-de").textContent = CONFIG.de;
+
+    // PASO 1: Abrir el sobre
+    btnSobre.addEventListener("click", () => {
+
+        btnSobre.classList.add("abierto");
+
+        // Esperar a que termine la animación
+        setTimeout(() => {
+
+            // Ocultar el texto de instrucciones
+            const indicacion = document.querySelector(".envoltorio-indicacion");
+
+            if (indicacion) {
+                indicacion.classList.add("oculto");
+            }
+
+            // Mostrar botón para ir al calendario
+            btnContinuar.classList.remove("oculto");
+
+        }, 700);
+    });
+
+    // PASO 2: Entrar al calendario
+    btnContinuar.addEventListener("click", () => {
+
+        envoltorio.classList.add("cerrado");
+
+        setTimeout(() => {
+            calendario.classList.remove("oculto");
+        }, 600);
+
+    });
 }
 
 // ---------- Inicialización ----------
