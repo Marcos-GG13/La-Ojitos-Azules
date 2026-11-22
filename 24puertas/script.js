@@ -375,12 +375,71 @@ function configurarSobre() {
     });
 }
 
+// ---------- Cuenta atrás ----------
+
+function actualizarCuentaAtras() {
+    const ahora = new Date();
+
+    const inicioDiciembre = new Date(CONFIG.año, 11, 1, 0, 0, 0);
+    const finalDiciembre = new Date(CONFIG.año, 11, 25, 0, 0, 0);
+
+    let siguientePuerta;
+
+    // Antes de diciembre: puerta 1
+    if (ahora < inicioDiciembre) {
+        siguientePuerta = inicioDiciembre;
+    }
+
+    // Durante diciembre: siguiente día a las 00:00
+    else if (ahora < finalDiciembre) {
+        siguientePuerta = new Date(
+            CONFIG.año,
+            11,
+            ahora.getDate() + 1,
+            0, 0, 0
+        );
+    }
+
+    // Ya se han abierto todas las puertas
+    else {
+        document.getElementById("cuenta-atras").innerHTML =
+            "<p>¡Ya están abiertas las 24 puertas! ❤️</p>";
+        return;
+    }
+
+    const diferencia = siguientePuerta - ahora;
+
+    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diferencia / (1000 * 60 * 60)) % 24);
+    const minutos = Math.floor((diferencia / (1000 * 60)) % 60);
+    const segundos = Math.floor((diferencia / 1000) % 60);
+
+    // Mostrar los días solo si faltan 24 horas o más
+    document.getElementById("unidad-dias").style.display =
+        diferencia >= 24 * 60 * 60 * 1000 ? "flex" : "none";
+
+    document.getElementById("cuenta-dias").textContent =
+        String(dias).padStart(2, "0");
+
+    document.getElementById("cuenta-horas").textContent =
+        String(horas).padStart(2, "0");
+
+    document.getElementById("cuenta-minutos").textContent =
+        String(minutos).padStart(2, "0");
+
+    document.getElementById("cuenta-segundos").textContent =
+        String(segundos).padStart(2, "0");
+}
 
 // ---------- Inicialización ----------
 
 document.addEventListener("DOMContentLoaded", () => {
   configurarSobre();
   crearPuertas();
+
+  // Iniciar cuenta atrás
+  actualizarCuentaAtras();
+  setInterval(actualizarCuentaAtras, 1000);
 
   // Cerrar modal
   document.getElementById("btn-cerrar").addEventListener("click", cerrarModal);

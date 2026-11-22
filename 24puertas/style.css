@@ -833,3 +833,59 @@ img {
 .btn-continuar.oculto {
     display: none !important;
 }
+
+/* ---------- Cuenta atrás ---------- */
+
+.calendario-subtitulo {
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--texto-suave);
+    font-size: 0.95rem;
+}
+
+.cuenta-atras {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem auto 2rem;
+}
+
+.tiempo-unidad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 60px;
+    gap: 5px;
+}
+
+.tiempo-unidad span {
+    font-family: "Playfair Display", serif;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--texto);
+    font-variant-numeric: tabular-nums;
+}
+
+.tiempo-unidad small {
+    font-size: 0.7rem;
+    color: var(--texto-suave);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+@media (max-width: 400px) {
+    .cuenta-atras {
+        gap: 0.6rem;
+    }
+
+    .tiempo-unidad {
+        min-width: 52px;
+    }
+
+    .tiempo-unidad span {
+        font-size: 1.6rem;
+    }
+}
