@@ -343,31 +343,21 @@ function configurarSobre() {
     const envoltorio = document.getElementById("envoltorio");
     const calendario = document.getElementById("calendario");
 
-    // Rellenar nombres
-    document.getElementById("carta-nombre").textContent = CONFIG.para;
-    document.getElementById("sobre-nombre").textContent = CONFIG.para;
-    document.getElementById("saludo-sobre").textContent =
-        `${CONFIG.de} te ha escrito algo`;
-
-    document.getElementById("nombre-para").textContent = CONFIG.para;
-    document.getElementById("nombre-de").textContent = CONFIG.de;
-
     // PASO 1: Abrir el sobre
     btnSobre.addEventListener("click", () => {
 
         btnSobre.classList.add("abierto");
 
-        // Esperar a que termine la animación
         setTimeout(() => {
 
-            // Ocultar el texto de instrucciones
+            // Ocultar las instrucciones
             const indicacion = document.querySelector(".envoltorio-indicacion");
 
             if (indicacion) {
                 indicacion.classList.add("oculto");
             }
 
-            // Mostrar botón para ir al calendario
+            // Mostrar el botón para entrar al calendario
             btnContinuar.classList.remove("oculto");
 
         }, 700);
@@ -384,6 +374,7 @@ function configurarSobre() {
 
     });
 }
+
 
 // ---------- Inicialización ----------
 
