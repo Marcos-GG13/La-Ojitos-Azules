@@ -563,7 +563,7 @@ img {
 .modal-contenido {
   background: linear-gradient(165deg, #241c2c, #1a1420);
   border-radius: 18px;
-  padding: 1.75rem 1.5rem 1.75rem;
+  padding: 1.75rem 0;
   position: relative;
   border: 1px solid rgba(255, 255, 255, 0.06);
   max-height: 90dvh;
@@ -573,7 +573,7 @@ img {
 .modal-cerrar {
   position: absolute;
   top: 0.85rem;
-  right: 0.9rem;
+  right: 1.5rem;
   width: 36px;
   height: 36px;
   border: none;
@@ -601,6 +601,7 @@ img {
   text-transform: uppercase;
   margin-bottom: 1rem;
   font-weight: 500;
+  padding-inline: 1.5rem;
 }
 
 .modal-cuerpo {
@@ -609,13 +610,98 @@ img {
   gap: 1.1rem;
 }
 
+/* MARCO NAVIDEÑO */
+.marco-navideno {
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+
+  border: 8px solid transparent;
+  border-image: repeating-linear-gradient(
+    -45deg,
+    #c23b3b 0px,
+    #c23b3b 8px,
+    #f5f0eb 8px,
+    #f5f0eb 16px
+  ) 8;
+}
+
+/* Ocultar también el marco cuando la foto está oculta */
+.marco-navideno:has(.modal-foto.oculto) {
+  display: none;
+}
+
+/* FOTOGRAFÍA */
 .modal-foto {
-  width: 100%;
+  display: block;
+  width: auto;
+  max-width: 100%;
   height: auto;
-  max-height: none;
+  max-height: 55dvh;
   object-fit: contain;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* ADORNOS DE MUÉRDAGO */
+.adorno-muerdago {
+  position: absolute;
+  width: 42px;
+  height: 42px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.adorno-muerdago svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.4));
+}
+
+/* Cuatro esquinas */
+.esquina-superior-izquierda {
+  top: -18px;
+  left: -18px;
+  transform: rotate(0deg);
+}
+
+.esquina-superior-derecha {
+  top: -18px;
+  right: -18px;
+  transform: rotate(90deg);
+}
+
+.esquina-inferior-derecha {
+  bottom: -18px;
+  right: -18px;
+  transform: rotate(180deg);
+}
+
+.esquina-inferior-izquierda {
+  bottom: -18px;
+  left: -18px;
+  transform: rotate(270deg);
+}
+
+/* Eliminar posibles líneas divisorias */
+.modal-cuerpo {
+  border-top: none;
+  border-bottom: none;
+}
+
+.modal-cuerpo::before,
+.modal-cuerpo::after,
+.marco-navideno::before,
+.marco-navideno::after {
+  content: none !important;
+}
+
+.modal-cuerpo hr {
+  display: none;
 }
 
 .modal-texto {
@@ -623,6 +709,7 @@ img {
   line-height: 1.55;
   color: var(--texto);
   white-space: pre-wrap;
+  padding-inline: 1.5rem;
 }
 
 /* ========== TOAST ========== */
@@ -713,15 +800,11 @@ img {
   }
 
   .modal-contenido {
-    padding: 1.4rem 1.15rem 1.5rem;
-    border-radius: 16px;
-  }
+  padding: 1.4rem 0 1.5rem;
+  border-radius: 16px;
+}
 
-  .modal-foto {
-    max-height: 240px;
-  }
-
-  .modal-texto {
+.modal-texto {
     font-size: 1rem;
   }
 
