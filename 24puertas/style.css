@@ -611,9 +611,10 @@ img {
 
 .modal-foto {
   width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
   border-radius: 12px;
-  object-fit: cover;
-  max-height: 280px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 
@@ -780,13 +781,6 @@ img {
 .modal-cerrar {
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
-}
-
-/* Evitar que el modal se vea cortado en pantallas bajas */
-@media (max-height: 700px) {
-  .modal-foto {
-    max-height: 180px;
-  }
 }
 
 /* BOTÓN PARA CONTINUAR AL CALENDARIO */
