@@ -452,3 +452,110 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Escape") cerrarModal();
   });
 });
+
+
+
+/* ==========================================
+   GENERADOR DE NIEVE - 24 PUERTAS
+   ========================================== */
+
+(() => {
+    const contenedor = document.getElementById("nieve");
+
+    if (!contenedor) return;
+
+    const movimientoReducido = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    // Cantidad adaptada al dispositivo
+    const esMovil = window.matchMedia(
+        "(max-width: 520px)"
+    ).matches;
+
+    const cantidadCopos = esMovil ? 45 : 90;
+
+    // Generación de números aleatorios
+    const aleatorio = (min, max) =>
+        Math.random() * (max - min) + min;
+
+    const fragmento = document.createDocumentFragment();
+
+    for (let i = 0; i < cantidadCopos; i++) {
+
+        const copo = document.createElement("div");
+        const balanceo = document.createElement("span");
+
+        copo.className = "copo";
+        balanceo.className = "copo-balanceo";
+
+        // Tamaño del copo
+        const tamano = aleatorio(1.5, 4.5);
+
+        // Duración de caída
+        const duracion = aleatorio(18, 36);
+
+        // Balanceo horizontal
+        const tiempoBalanceo = aleatorio(3, 7);
+
+        const desplazamiento = aleatorio(8, 30);
+
+        // Retraso negativo: distribuye los copos
+        // por toda la pantalla desde el segundo 0
+        const retraso = -aleatorio(0, duracion);
+
+        // Posición horizontal
+        const posicionX = aleatorio(0, 100);
+
+        // Profundidad simulada mediante opacidad
+        const opacidad = aleatorio(0.35, 0.9);
+
+        copo.style.setProperty(
+            "--tamano",
+            `${tamano}px`
+        );
+
+        copo.style.setProperty(
+            "--posicion-x",
+            `${posicionX}%`
+        );
+
+        copo.style.setProperty(
+            "--duracion",
+            `${duracion}s`
+        );
+
+        copo.style.setProperty(
+            "--retraso",
+            `${retraso}s`
+        );
+
+        copo.style.setProperty(
+            "--balanceo",
+            `${tiempoBalanceo}s`
+        );
+
+        copo.style.setProperty(
+            "--desplazamiento",
+            `${desplazamiento}px`
+        );
+
+        copo.style.setProperty(
+            "--opacidad",
+            opacidad
+        );
+
+        // Accesibilidad: nieve estática
+        // cuando el usuario reduce las animaciones
+        if (movimientoReducido) {
+            copo.style.top = `${aleatorio(0, 100)}%`;
+        }
+
+        copo.appendChild(balanceo);
+        fragmento.appendChild(copo);
+    }
+
+    // Una única inserción en el DOM
+    contenedor.appendChild(fragmento);
+
+})();
