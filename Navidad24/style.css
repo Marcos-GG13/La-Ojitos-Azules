@@ -1478,3 +1478,17 @@ body {
         border-bottom-width: 170px;
     }
 }
+
+/* Evitar el scroll de la página en móviles */
+@media (max-width: 520px) {
+    html,
+    body {
+        height: 100%;
+        overflow: hidden;
+        overscroll-behavior: none;
+    }
+
+    body {
+        min-height: 100dvh;
+    }
+}
