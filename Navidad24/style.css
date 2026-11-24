@@ -1292,7 +1292,7 @@ body {
 .tronco {
     position: absolute;
 
-    bottom: 0;
+    bottom: -55px;
     left: 50%;
 
     width: 32px;
@@ -1469,7 +1469,7 @@ body {
     }
 
     .tronco {
-        height: 42px;
+        height: 50px;
     }
 
     .abeto {
