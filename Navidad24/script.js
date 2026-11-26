@@ -28,11 +28,11 @@ const CONFIG = {
 const DIAS = [
   { 
     dia: 1, 
-    texto: `Hoy, 1 de Diciembre de 2026, empieza nuestra primera Navidad juntitos, la primera de infinitas que vamos a vivir juntitos miamor. Y me hace super feliz saber que hace tan solo 13 dias empezamos una nueva etapa en nuestra vida amor, y ahora, porfin estamos juntitos.
+    texto: `Hoy, 1 de diciembre de 2026, empieza nuestra primera Navidad juntitos, la primera de infinitas que vamos a vivir juntitos miamor. Y me hace super feliz saber que hace tan solo 13 días empezamos una nueva etapa en nuestra vida amor, y ahora, porfin estamos juntitos.
     
-    Han pasado exactamente 246 dias desde la primera vez que hablamos (unos 8 meses y un dia jejej). Hemos vivido un monton de aventuras en estos 8 meses y me hace más feliz de lo que puedes imaginarte recordar todos los momentos que hemos vivido juntitos, y me hace aun más feliz el pensar que tenemos toda una vida por delante para crecer juntitos, vernos cumplir nuestras metas, formar una familia, construir nuestro hogar y vivir toda una vida juntitos miamor, solos tu y yo, por el resto de nuestros dias.
+    Han pasado exactamente 246 días desde la primera vez que hablamos (unos 8 meses y un día jejej). Hemos vivido un montón de aventuras en estos 8 meses y me hace más feliz de lo que puedes imaginarte recordar todos los momentos que hemos vivido juntitos, y me hace aún más feliz el pensar que tenemos toda una vida por delante para crecer juntitos, vernos cumplir nuestras metas, formar una familia, construir nuestro hogar y vivir toda una vida juntitos miamor, solos tú y yo, por el resto de nuestros días.
     
-    Tengo muchisimas ganitas de pasar estas navidades contigo mivida y se que quiero pasar todos los dias del año a tu lado por el resto de mi vida. Eres el amor de mi vida Enana, y lo vas a ser siempre. T'estimoooo infinitameeenntttt amooorrr de la meva vidaaaaaa 🥹❤️❤️❤️.`, 
+    Tengo muchísimas ganitas de pasar estas navidades contigo mivida y sé que quiero pasar todos los días del año a tu lado por el resto de mi vida. Eres el amor de mi vida Enana, y lo vas a ser siempre. T'estimoooo infinitameeenntttt amooorrr de la meva vidaaaaaa 🥹❤️❤️❤️.`, 
     foto: "imagenes/dia1.jpg" 
   },
   { dia: 2,  texto: "Hoy solo quería recordarte lo mucho que me haces sonreír.", foto: "imagenes/dia2.jpg" },

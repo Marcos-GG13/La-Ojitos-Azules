@@ -843,11 +843,9 @@ img {
   font-size: 1.05rem;
   line-height: 1.55;
   color: var(--texto);
-  white-space: pre-line;       /* conserva los saltos de línea y elimina la sangría de los espacios */
+  white-space: pre-line;   /* conserva los saltos de línea y elimina la sangría de los espacios */
   text-align: justify;
-  text-align-last: left;       /* la última línea de cada párrafo no se estira */
-  /*hyphens: auto;               /* separa sílabas para que la justificación no deje huecos grandes */
-  -webkit-hyphens: auto;
+  text-align-last: left;   /* la última línea de cada párrafo no se estira */
   padding-inline: 1.5rem;
 }
 
