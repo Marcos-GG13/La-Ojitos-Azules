@@ -524,6 +524,7 @@ img {
 
 /* Hoja de la puerta (animación de apertura) */
 .puerta-hoja {
+  --celda: 24px; /* tamaño de celda del papel; en móvil se reduce */
   position: absolute;
   inset: 0;
   background: linear-gradient(150deg, var(--burdeos) 0%, var(--burdeos-medio) 55%, var(--burdeos-oscuro) 100%);
@@ -557,7 +558,7 @@ img {
     linear-gradient(45deg, transparent 47.5%, rgba(212, 168, 75, 0.4) 47.5%, rgba(212, 168, 75, 0.4) 52.5%, transparent 52.5%),
     linear-gradient(-45deg, transparent 47.5%, rgba(212, 168, 75, 0.4) 47.5%, rgba(212, 168, 75, 0.4) 52.5%, transparent 52.5%),
     linear-gradient(115deg, transparent 35%, rgba(255, 235, 200, 0.1) 50%, transparent 65%);
-  background-size: 24px 24px, 24px 24px, 24px 24px, 24px 24px, 24px 24px, 100% 100%;
+  background-size: var(--celda) var(--celda), var(--celda) var(--celda), var(--celda) var(--celda), var(--celda) var(--celda), var(--celda) var(--celda), 100% 100%;
   background-repeat: repeat, repeat, repeat, repeat, repeat, no-repeat;
   transition: opacity 0.4s ease;
 }
@@ -565,6 +566,45 @@ img {
 /* Al abrirse, el papel desaparece mientras la hoja gira */
 .puerta.abierta .puerta-hoja::before {
   opacity: 0;
+}
+
+/* ========== VARIANTES DEL PAPEL DE REGALO ==========
+   El patrón base (celosía) está en .puerta-hoja::before.
+   Las siguientes variantes se asignan por posición en la rejilla:
+   4n+1 → celosía (base), 4n+2 → confeti, 4n+3 → rayas, 4n+4 → tartán.
+   Cada una reemplaza solo la imagen de fondo y mantiene la sombra y la
+   desaparición al abrir la puerta. */
+
+/* Variante 2: confeti de puntos dorados y crema */
+.puerta:nth-child(4n+2) .puerta-hoja::before {
+  background-image:
+    radial-gradient(circle, rgba(240, 212, 138, 0.95) 0 1.1px, transparent 1.7px),
+    radial-gradient(circle, rgba(246, 236, 220, 0.7) 0 0.8px, transparent 1.3px),
+    linear-gradient(115deg, transparent 35%, rgba(255, 235, 200, 0.1) 50%, transparent 65%);
+  background-size: var(--celda) var(--celda), var(--celda) var(--celda), 100% 100%;
+  background-position: 0 0, calc(var(--celda) / 2) calc(var(--celda) / 2), 0 0;
+  background-repeat: repeat, repeat, no-repeat;
+}
+
+/* Variante 3: rayas diagonales doradas */
+.puerta:nth-child(4n+3) .puerta-hoja::before {
+  background-image:
+    repeating-linear-gradient(45deg, transparent 0 5px, rgba(212, 168, 75, 0.35) 5px 6px),
+    linear-gradient(115deg, transparent 35%, rgba(255, 235, 200, 0.1) 50%, transparent 65%);
+  background-size: auto, 100% 100%;
+  background-repeat: repeat, no-repeat;
+}
+
+/* Variante 4: tartán fino con punto dorado en cada cruce */
+.puerta:nth-child(4n+4) .puerta-hoja::before {
+  background-image:
+    linear-gradient(to bottom, transparent 46%, rgba(246, 236, 220, 0.28) 46% 54%, transparent 54%),
+    linear-gradient(to right, transparent 46%, rgba(246, 236, 220, 0.28) 46% 54%, transparent 54%),
+    radial-gradient(circle, rgba(212, 168, 75, 1) 0 1.6px, transparent 2.2px),
+    linear-gradient(115deg, transparent 35%, rgba(255, 235, 200, 0.1) 50%, transparent 65%);
+  background-size: var(--celda) var(--celda), var(--celda) var(--celda), var(--celda) var(--celda), 100% 100%;
+  background-position: 0 0, 0 0, center, 0 0;
+  background-repeat: repeat, repeat, repeat, no-repeat;
 }
 
 .puerta.abierta .puerta-hoja {
@@ -880,9 +920,10 @@ img {
     font-size: 1.35rem;
   }
 
-  /* Celda del papel más pequeña para que se vea bien en puertas pequeñas */
-  .puerta-hoja::before {
-    background-size: 18px 18px, 18px 18px, 18px 18px, 18px 18px, 18px 18px, 100% 100%;
+  /* Celda del papel más pequeña para que se vea bien en puertas pequeñas.
+     Todos los patrones usan --celda, así que basta con cambiar la variable. */
+  .puerta-hoja {
+    --celda: 18px;
   }
 
   .puerta.especial .lazo {
