@@ -846,6 +846,8 @@ img {
   white-space: pre-line;   /* conserva los saltos de línea y elimina la sangría de los espacios */
   text-align: justify;
   text-align-last: left;   /* la última línea de cada párrafo no se estira */
+  hyphens: manual;         /* nunca separar palabras con guion */
+  overflow-wrap: normal;   /* no partir palabras aunque no quepan */
   padding-inline: 1.5rem;
 }
 
