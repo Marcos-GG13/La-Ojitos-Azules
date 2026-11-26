@@ -28,11 +28,11 @@ const CONFIG = {
 const DIAS = [
   { 
     dia: 1, 
-    texto: `Hoy empieza nuestra cuenta atrás para Navidad y no quería dejar pasar ni un segundo sin recordarte lo muchísimo que te quiero. 
-
-A veces el día a día va tan rápido que se nos olvida parar y agradecer lo que tenemos, pero hoy quiero hacerlo contigo. Eres lo mejor que me ha pasado y cada momento a tu lado se siente como un regalo. 
-
-Prepárate, porque durante estos 24 días voy a ir dejándote por aquí pequeños trocitos de todo lo que siento por ti. ¡TEAMOOOOOOO!`, 
+    texto: `Hoy, 1 de Diciembre de 2026, empieza nuestra primera Navidad juntitos, la primera de infinitas que vamos a vivir juntitos miamor. Y me hace super feliz saber que hace tan solo 13 dias empezamos una nueva etapa en nuestra vida amor, y ahora, porfin estamos juntitos.
+    
+    Han pasado exactamente 246 dias desde la primera vez que hablamos (unos 8 meses y un dia jejej). Hemos vivido un monton de aventuras en estos 8 meses y me hace más feliz de lo que puedes imaginarte recordar todos los momentos que hemos vivido juntitos, y me hace aun más feliz el pensar que tenemos toda una vida por delante para crecer juntitos, vernos cumplir nuestras metas, formar una familia, construir nuestro hogar y vivir toda una vida juntitos miamor, solos tu y yo, por el resto de nuestros dias.
+    
+    Tengo muchisimas ganitas de pasar estas navidades contigo mivida y se que quiero pasar todos los dias del año a tu lado por el resto de mi vida. Eres el amor de mi vida Enana, y lo vas a ser siempre. T'estimoooo infinitameeenntttt amooorrr de la meva vidaaaaaa 🥹❤️❤️❤️.`, 
     foto: "imagenes/dia1.jpg" 
   },
   { dia: 2,  texto: "Hoy solo quería recordarte lo mucho que me haces sonreír.", foto: "imagenes/dia2.jpg" },
