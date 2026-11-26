@@ -9,7 +9,12 @@
   --rojo: #c23b3b;
   --rojo-claro: #e85a5a;
   --rojo-oscuro: #8b1e1e;
+  --burdeos: #7d1f2b;
+  --burdeos-medio: #5c1620;
+  --burdeos-oscuro: #3f0f17;
   --dorado: #d4a84b;
+  --dorado-claro: #f0d48a;
+  --crema: #f6ecdc;
   --texto: #f5f0eb;
   --texto-suave: #c9c0b8;
   --carta: #f8f1e9;
@@ -438,6 +443,28 @@ img {
   color: var(--texto);
   z-index: 2;
   transition: opacity 0.3s ease;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7), 0 0 10px rgba(0, 0, 0, 0.35);
+}
+
+/* Halo oscuro detrás del número para que siga legible sobre el papel.
+   Usa em, así que escala con el tamaño de la fuente de cada puerta. */
+.puerta-numero::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2.4em;
+  height: 2.4em;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(20, 8, 12, 0.55) 0%,
+    rgba(20, 8, 12, 0.35) 45%,
+    transparent 70%
+  );
+  z-index: -1;
+  pointer-events: none;
 }
 
 .puerta.abierta .puerta-numero {
@@ -499,19 +526,52 @@ img {
 .puerta-hoja {
   position: absolute;
   inset: 0;
-  background: linear-gradient(145deg, #32283a, #221a2a);
+  background: linear-gradient(150deg, var(--burdeos) 0%, var(--burdeos-medio) 55%, var(--burdeos-oscuro) 100%);
   border-radius: var(--radio);
   transform-origin: left center;
   transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+  box-shadow:
+    inset 0 0 0 1px rgba(212, 168, 75, 0.3),
+    inset 0 0 18px rgba(0, 0, 0, 0.25);
+}
+
+/* ========== PAPEL DE REGALO (cara frontal de las puertas cerradas) ==========
+   Un único patrón repetido en todas las puertas, sobre .puerta-hoja:
+   - Celosía de rombos dorada: dos diagonales por celda de 24 px.
+   - Punto dorado en cada vértice de la celosía.
+   - Destello crema (dos elipses cruzadas) en el centro de cada celda.
+   - Brillo diagonal muy suave que simula el papel.
+   Se desvanece al abrirse la puerta. */
+.puerta-hoja::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(ellipse 4px 0.9px at 50% 50%, rgba(246, 236, 220, 0.95) 0%, transparent 100%),
+    radial-gradient(ellipse 0.9px 4px at 50% 50%, rgba(246, 236, 220, 0.95) 0%, transparent 100%),
+    radial-gradient(circle at 0 0, rgba(240, 212, 138, 0.9) 0 1.2px, transparent 1.8px),
+    linear-gradient(45deg, transparent 47.5%, rgba(212, 168, 75, 0.4) 47.5%, rgba(212, 168, 75, 0.4) 52.5%, transparent 52.5%),
+    linear-gradient(-45deg, transparent 47.5%, rgba(212, 168, 75, 0.4) 47.5%, rgba(212, 168, 75, 0.4) 52.5%, transparent 52.5%),
+    linear-gradient(115deg, transparent 35%, rgba(255, 235, 200, 0.1) 50%, transparent 65%);
+  background-size: 24px 24px, 24px 24px, 24px 24px, 24px 24px, 24px 24px, 100% 100%;
+  background-repeat: repeat, repeat, repeat, repeat, repeat, no-repeat;
+  transition: opacity 0.4s ease;
+}
+
+/* Al abrirse, el papel desaparece mientras la hoja gira */
+.puerta.abierta .puerta-hoja::before {
+  opacity: 0;
 }
 
 .puerta.abierta .puerta-hoja {
   transform: rotateY(-105deg);
 }
 
-/* Lazo especial puerta 24 */
+/* Lazo especial puerta 24 (integrado con el papel dorado) */
 .puerta.especial .lazo {
   position: absolute;
   top: 12%;
@@ -527,7 +587,7 @@ img {
 .puerta.especial .lazo::after {
   content: "";
   position: absolute;
-  background: var(--rojo);
+  background: var(--dorado-claro);
   border-radius: 3px;
 }
 
@@ -556,15 +616,19 @@ img {
   transform: translate(-50%, -50%);
   width: 18px;
   height: 18px;
-  background: var(--rojo-claro);
+  background: var(--dorado);
   border-radius: 50%;
   z-index: 4;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
-/* Estado: aún no disponible */
+/* Estado: aún no disponible (papel atenuado y hoja más oscura) */
 .puerta.bloqueada .puerta-hoja {
-  background: linear-gradient(145deg, #25202c, #1a1620);
+  background: linear-gradient(150deg, #4a1a20 0%, #2c0d13 100%);
+}
+
+.puerta.bloqueada .puerta-hoja::before {
+  opacity: 0.45;
 }
 
 .puerta.bloqueada .puerta-numero {
@@ -814,6 +878,11 @@ img {
 
   .puerta.destacada .puerta-numero {
     font-size: 1.35rem;
+  }
+
+  /* Celda del papel más pequeña para que se vea bien en puertas pequeñas */
+  .puerta-hoja::before {
+    background-size: 18px 18px, 18px 18px, 18px 18px, 18px 18px, 18px 18px, 100% 100%;
   }
 
   .puerta.especial .lazo {
